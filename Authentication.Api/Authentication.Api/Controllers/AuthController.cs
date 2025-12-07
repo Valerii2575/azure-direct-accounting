@@ -29,7 +29,7 @@ namespace Authentication.Api.Controllers
                 var authResponse = await _authService.ExchangeCodeForTokensAsync(request.Code!, request.State!);
                 return Ok(authResponse);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return BadRequest($"Authentication failed: {ex.Message}");
             }
@@ -44,7 +44,7 @@ namespace Authentication.Api.Controllers
                 {
                     return BadRequest("Refresh token is required.");
                 }
-                var authResponse = await _authService.RefreshTokensAsync(request.RefreshToken);
+                var authResponse = await _authService.RefreshTokenAsync(request.RefreshToken);
                 return Ok(authResponse);
             }
             catch (Exception ex)
@@ -57,9 +57,9 @@ namespace Authentication.Api.Controllers
         public ActionResult<object> GetLoginUrl()
         {
             var clientId = HttpContext.RequestServices.GetService<IConfiguration>()["AzureAd:ClientId"];
-            var tenantId= HttpContext.RequestServices.GetService<IConfiguration>()["AzureAd:TenantId"];
+            var tenantId = HttpContext.RequestServices.GetService<IConfiguration>()["AzureAd:TenantId"];
             var redirectIri = HttpContext.RequestServices.GetService<IConfiguration>()["AzureAd:RedirectUri"];
-            var state =Guid.NewGuid().ToString();
+            var state = Guid.NewGuid().ToString();
             var nonce = Guid.NewGuid().ToString();
 
             var loginUrl = $"https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize" +
@@ -73,4 +73,5 @@ namespace Authentication.Api.Controllers
 
             return Ok(new { loginUrl, state, nonce });
         }
+    }
 }

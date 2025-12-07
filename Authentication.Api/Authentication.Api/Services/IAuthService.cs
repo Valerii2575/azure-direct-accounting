@@ -5,7 +5,7 @@ namespace Authentication.Api.Services
     public interface IAuthService
     {
         Task<AuthResponse> ExchangeCodeForTokensAsync(string code, string state);
-        Task<AuthResponse> RefreshTokensAsync(string refreshToken);
+        Task<AuthResponse> RefreshTokenAsync(string refreshToken);
         UserInfo ExtractUserInformToken(string idToken);
     }
 }
