@@ -1,0 +1,26 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+    <div class="user-info">
+      <span>Welcome, {{ user?.name}}</span>
+      <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <div class="user-card">
+      <h2>User Information</h2>
+      <div class="user-details" *ngIf="user">
+        <p><strong>Name:</strong>{{ user.name}}</p>
+        <p><strong>Email:</strong>{{ user.email}}</p>
+        <p><strong>ID:</strong>{{ user.id}}</p>
+      </div>
+    </div>
+
+    <div class="token-info">
+      <h3>Authentication Status</h3>
+      <p class="statuc-indicator authenticated">Authenticated</p>
+      <button class="refresh-button" (click)="refreshToken()">Refresh Token</button>
+    </div>
+  </main>
+</div>
